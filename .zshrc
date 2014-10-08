@@ -46,14 +46,41 @@ COMPLETION_WAITING_DOTS="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git vi-mode osx colorize)
 
 source $ZSH/oh-my-zsh.sh
 
+if [[ `uname` == 'Linux' ]]
+then
+    plugins=(git vi-mode colorize)
+        export LINUX=1
+        export GNU_USERLAND=1
+    export PATH="/opt/local/bin:/opt/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin"
+    export MANPATH="/opt/local/share/man:/usr/local/man:$MANPATH"
+else
+        export LINUX=
+fi
+
+if [[ `uname` == 'Darwin' ]]
+then
+    plugins=(git vi-mode osx colorize)
+    export PATH="/opt/local/libexec/gnubin/:/opt/local/bin:/opt/local/sbin:/opt/local/lib/mysql55/bin/:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/opt/local/Library/Frameworks/Python.framework/Versions/2.7/bin"
+    export MANPATH="/opt/local/share/man:/usr/local/man:$MANPATH"
+        export OSX=1
+else
+        export OSX=
+fi
+
+# Detect Macports GNU userland installation
+if [[ "$OSX" == "1" ]]
+then
+    if [[ -e /opt/local/libexec/gnubin ]]
+    then
+        export GNU_USERLAND=1
+    fi
+fi
+
 # User configuration
 
-export PATH="/opt/local/libexec/gnubin/:/opt/local/bin:/opt/local/sbin:/opt/local/lib/mysql55/bin/:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/opt/local/Library/Frameworks/Python.framework/Versions/2.7/bin"
-export MANPATH="/opt/local/share/man:/usr/local/man:$MANPATH"
 
 # # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
