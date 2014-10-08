@@ -124,6 +124,7 @@ fi
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
 alias ls='ls --color'
+alias reload=". ~/.zshrc && echo 'ZSH config reloaded from ~/.zshrc'"
 
 # Base16 Shell
 BASE16_SCHEME="monokai"
